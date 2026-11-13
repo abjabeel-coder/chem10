@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chem10 — Class 10 Chemistry MCQ Practice</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<!-- ───── NAV ───── -->
+<nav class="nav">
+  <a class="nav-brand" href="index.html">
+    <span class="nav-atom">⚗️</span> Chem10
+  </a>
+  <div class="nav-right" id="navRight">
+    <button class="theme-toggle" id="themeToggle" title="Toggle light/dark mode">🌙</button>
+    <span class="nav-user" id="navUser"></span>
+    <button class="btn btn-ghost" id="authBtn">Sign In</button>
+  </div>
+</nav>
+
+<!-- ───── SCREENS ───── -->
+
+<!-- HOME -->
+<div id="screenHome" class="screen active">
+  <div class="hero">
+    <div class="hero-label">Class 10 Chemistry · Punjab Board</div>
+    <h1 class="hero-title">Test your chemistry.<br>Chapter by chapter.</h1>
+    <p class="hero-sub">96 verified MCQs across 13 chapters. Shuffled options, timed tests, instant explanations.</p>
+    <button class="btn btn-primary btn-lg" id="startPracticeBtn">Start Practising</button>
+  </div>
+
+  <div class="stats-row">
+    <div class="stat-pill"><span class="stat-num">96</span> MCQs</div>
+    <div class="stat-pill"><span class="stat-num">13</span> Chapters</div>
+    <div class="stat-pill"><span class="stat-num">100%</span> Verified</div>
+  </div>
+
+  <div class="chapter-grid" id="homeChapterGrid"></div>
+</div>
+
+<!-- CHAPTER SELECT -->
+<div id="screenSetup" class="screen">
+  <div class="screen-header">
+    <button class="back-btn" id="backToHome">← Home</button>
+    <h2 class="screen-title">Set up your test</h2>
+  </div>
+
+  <div class="setup-card">
+    <div class="setup-section">
+      <label class="setup-label">Choose chapters</label>
+      <div class="chapter-check-grid" id="chapterCheckGrid"></div>
+      <div class="setup-select-row">
+        <button class="btn btn-ghost btn-sm" id="selectAll">Select All</button>
+        <button class="btn btn-ghost btn-sm" id="clearAll">Clear</button>
+      </div>
+    </div>
+
+    <div class="setup-section">
+      <label class="setup-label">Number of questions</label>
+      <div class="qty-row">
+        <button class="qty-btn" id="qtyMinus">−</button>
+        <span class="qty-val" id="qtyVal">10</span>
+        <button class="qty-btn" id="qtyPlus">+</button>
+      </div>
+      <div class="qty-hint" id="qtyHint">10 questions from selected chapters</div>
+    </div>
+
+    <div class="setup-section">
+      <label class="setup-label">Time limit</label>
+      <div class="time-chips" id="timeChips">
+        <button class="time-chip" data-min="5">5 min</button>
+        <button class="time-chip active" data-min="10">10 min</button>
+        <button class="time-chip" data-min="15">15 min</button>
+        <button class="time-chip" data-min="20">20 min</button>
+        <button class="time-chip" data-min="30">30 min</button>
+        <button class="time-chip" data-min="0">No limit</button>
+      </div>
+    </div>
+
+    <button class="btn btn-primary btn-full" id="beginTestBtn">Begin Test →</button>
+  </div>
+</div>
+
+<!-- QUIZ -->
+<div id="screenQuiz" class="screen">
+  <div class="quiz-header">
+    <div class="quiz-progress-info">
+      <span id="qProgress">Q 1 of 10</span>
+    </div>
+    <div class="timer-wrap" id="timerWrap">
+      <span class="timer-icon">⏱</span>
+      <span id="timerDisplay">10:00</span>
+    </div>
+    <div class="quiz-score-pill" id="quizScorePill">0 / 0</div>
+  </div>
+
+  <div class="quiz-progress-bar"><div class="quiz-progress-fill" id="progressFill"></div></div>
+
+  <div class="quiz-body" id="quizBody">
+    <div class="question-meta" id="questionMeta"></div>
+    <div class="question-text" id="questionText"></div>
+    <div class="question-image" id="questionImage"></div>
+    <div class="options-list" id="optionsList"></div>
+
+    <!-- Explanation panel (shown after answering) -->
+    <div class="explanation-panel" id="explanationPanel" style="display:none">
+      <div class="exp-header">
+        <span class="exp-badge" id="expBadge"></span>
+        <span class="exp-label">Explanation</span>
+      </div>
+      <p class="exp-text" id="expText"></p>
+      <button class="btn btn-primary" id="nextBtn">Next Question →</button>
+    </div>
+  </div>
+</div>
+
+<!-- RESULTS -->
+<div id="screenResults" class="screen">
+  <div class="result-hero">
+    <div class="result-emoji" id="resultEmoji">🎉</div>
+    <div class="result-score-big" id="resultScoreBig"></div>
+    <div class="result-label" id="resultLabel"></div>
+  </div>
+
+  <div class="result-stats">
+    <div class="result-stat correct"><div class="rs-num" id="rsCorrect">0</div><div class="rs-lbl">Correct</div></div>
+    <div class="result-stat wrong"><div class="rs-num" id="rsWrong">0</div><div class="rs-lbl">Wrong</div></div>
+    <div class="result-stat time"><div class="rs-num" id="rsTime">—</div><div class="rs-lbl">Time taken</div></div>
+  </div>
+
+  <div class="result-review" id="resultReview"></div>
+
+  <div class="result-actions">
+    <button class="btn btn-primary" id="retryBtn">Try Again</button>
+    <button class="btn btn-ghost" id="newTestBtn">New Test</button>
+  </div>
+</div>
+
+<!-- AUTH MODAL -->
+<div class="modal-overlay" id="authModal" style="display:none">
+  <div class="modal">
+    <button class="modal-close" id="closeModal">✕</button>
+    <div class="modal-tabs">
+      <button class="modal-tab active" id="tabSignin">Sign In</button>
+      <button class="modal-tab" id="tabSignup">Sign Up</button>
+    </div>
+    <div id="authError" class="auth-error" style="display:none"></div>
+    <div class="modal-form" id="signinForm">
+      <input class="form-input" type="email" id="signinEmail" placeholder="Email address" />
+      <input class="form-input" type="password" id="signinPass" placeholder="Password" />
+      <button class="btn btn-primary btn-full" id="signinBtn">Sign In</button>
+    </div>
+    <div class="modal-form" id="signupForm" style="display:none">
+      <input class="form-input" type="text" id="signupName" placeholder="Your name" />
+      <input class="form-input" type="email" id="signupEmail" placeholder="Email address" />
+      <input class="form-input" type="password" id="signupPass" placeholder="Password (min 6 chars)" />
+      <button class="btn btn-primary btn-full" id="signupBtn">Create Account</button>
+    </div>
+    <div class="modal-guest">
+      <button class="btn btn-ghost btn-full" id="guestBtn">Continue as Guest</button>
+    </div>
+  </div>
+</div>
+
+<!-- TEACHER DASHBOARD -->
+<div id="screenTeacher" class="screen">
+  <div class="dash-header">
+    <div>
+      <button class="back-btn" id="backFromDash">← Back</button>
+      <h2 class="dash-title">Teacher Dashboard</h2>
+    </div>
+    <span class="dash-badge">🎓 Teacher View</span>
+  </div>
+  <div id="dashContent">
+    <div class="dash-loading"><div class="spin">⚗️</div><div>Loading student data…</div></div>
+  </div>
+</div>
+
+<!-- TIMEOUT MODAL -->
+<div class="modal-overlay" id="timeoutModal" style="display:none">
+  <div class="modal modal-sm">
+    <div class="timeout-icon">⏰</div>
+    <h3>Time's up!</h3>
+    <p>Your test has ended. Let's see how you did.</p>
+    <button class="btn btn-primary btn-full" id="timeoutResultBtn">View Results</button>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/config.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/quiz.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
